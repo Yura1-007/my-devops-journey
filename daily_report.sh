@@ -1,12 +1,13 @@
 #!/bin/bash
 # Ежедневный отчёт для GitHub
 
-echo "ЕЖЕДНЕВНЫЙ ОТЧЁТ - $(date +"%d.%m.%Y")"
+
+echo "📊 ЕЖЕДНЕВНЫЙ ОТЧЁТ - $(date +"%d.%m.%Y")"
 echo "======================================"
 
-# Статистика коммитов
-echo " СТАТИСТИКА GIT:"
-commits_today=$(git log --oneline --since="today" 2>/dev/null | wc -l)
+# Статистика коммитов (правильный подсчёт)
+echo "📈 СТАТИСТИКА GIT:"
+commits_today=$(git log --oneline --since="$(date +%Y-%m-%d) 00:00:00" --until="$(date +%Y-%m-%d) 23:59:59" 2>/dev/null | wc -l)
 commits_total=$(git log --oneline 2>/dev/null | wc -l)
 
 echo "Коммитов сегодня: $commits_today"
